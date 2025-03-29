@@ -51,3 +51,8 @@ export interface ocorrenciaEntrevDesapDTO {
   informacao: string;
   vestimentasDesaparecido: string;
 }
+
+export interface Paginacao {
+  pagina: number;
+  porPagina: number;
+}

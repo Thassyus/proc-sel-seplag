@@ -1,1 +1,10 @@
-<p>rodape works!</p>
+<div>
+  <mat-paginator
+    [length]="length"
+    [pageIndex]="pageIndex"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+    (page)="paginacao($event)"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>
