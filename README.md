@@ -1,2 +1,7 @@
-# proc-sel-seplag
-proc seletivo da seplag para analista de sistema pleno 
+# **PROCESSO SELETIVO SEPLAG**
+
+### Nome: **Thássyus Fabiano M de A Carvalho**
+
+### CPF: 038.682.661-78
+
+### Framework utilizado: **Angular 17**
