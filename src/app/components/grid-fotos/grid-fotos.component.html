@@ -1,8 +1,13 @@
+<app-filtro></app-filtro>
+
 <div
-  class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5 place-items-center"
+  class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5 place-items-center mt-8"
 >
   @for (pessoa of listaPessoas; track $index) {
-  <app-card-foto [pessoa]="pessoa"></app-card-foto>
+  <app-card-foto
+    [pessoa]="pessoa"
+    class="mx-auto transition duration-300 ease-in-out hover:scale-105 hover:shadow-2xl cursor-pointer"
+  ></app-card-foto>
 
   }
 </div>

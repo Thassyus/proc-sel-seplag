@@ -1,5 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import {
+  MatPaginator,
+  MatPaginatorIntl,
+  PageEvent,
+} from '@angular/material/paginator';
+import { ptBRPaginator } from '../../ptBRPaginator';
 import { PaginacaoService } from '../../services/paginacao.service';
 
 @Component({
@@ -8,6 +13,7 @@ import { PaginacaoService } from '../../services/paginacao.service';
   styleUrl: './rodape.component.scss',
   standalone: true,
   imports: [MatPaginator],
+  providers: [{ provide: MatPaginatorIntl, useValue: ptBRPaginator() }],
 })
 export class RodapeComponent {
   private readonly _paginacaoService = inject(PaginacaoService);

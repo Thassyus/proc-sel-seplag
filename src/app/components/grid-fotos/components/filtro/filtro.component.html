@@ -1,0 +1,70 @@
+<div [formGroup]="formBuscar">
+  <fieldset class="border w-full p-4 rounded-md bg-gray-50">
+    <legend class="bg-gray-200 px-2 rounded-sm text-xs">Buscar</legend>
+
+    <div class="flex flex-row flex-wrap lg:flex-nowrap space-y-5 lg:space-y-0">
+      <!-- nome -->
+      <div class="flex flex-col w-full mr-5">
+        <mat-label>Nome:</mat-label>
+
+        <input
+          matInput
+          type="text"
+          formControlName="nome"
+          placeholder="digite um nome"
+        />
+      </div>
+
+      <!-- faixa etaria -->
+      <div class="flex flex-col">
+        <mat-label>Faixa Etária:</mat-label>
+
+        <div class="flex flex-row mr-5">
+          <div class="mr-1">
+            <input
+              matInput
+              type="text"
+              formControlName="nome"
+              placeholder="De"
+            />
+          </div>
+
+          <div>
+            <input
+              matInput
+              type="text"
+              formControlName="nome"
+              placeholder="Ate"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- sexo -->
+      <div class="flex flex-col mr-5">
+        <mat-label>Sexo:</mat-label>
+
+        <mat-select formControlName="sexo" placeholder="Escolha um sexo">
+          @for (sexo of listaSexo; track $index) {
+          <mat-option [value]="sexo" class="uppercase">
+            {{ sexo.descricao }}
+          </mat-option>
+          }
+        </mat-select>
+      </div>
+
+      <!-- situacao -->
+      <div class="flex flex-col">
+        <mat-label>Situação:</mat-label>
+
+        <mat-select formControlName="status" placeholder="Escolha uma situação">
+          @for (situacao of listaSituacao; track $index) {
+          <mat-option [value]="situacao" class="uppercase">
+            {{ situacao.descricao }}
+          </mat-option>
+          }
+        </mat-select>
+      </div>
+    </div>
+  </fieldset>
+</div>

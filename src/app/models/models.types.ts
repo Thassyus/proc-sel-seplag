@@ -56,3 +56,11 @@ export interface Paginacao {
   pagina: number;
   porPagina: number;
 }
+
+export interface Opcao {
+  value: string;
+  descricao: string;
+}
+
+export type Sexo = Opcao;
+export type Situacao = Opcao;

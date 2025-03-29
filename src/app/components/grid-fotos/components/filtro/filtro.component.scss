@@ -1,0 +1,8 @@
+mat-label {
+  @apply text-sm text-black;
+}
+
+input,
+mat-select {
+  @apply uppercase border border-gray-300 rounded-md p-2 text-sm bg-white h-10
+}

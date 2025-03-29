@@ -1,17 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { FormBuilder, UntypedFormGroup } from '@angular/forms';
 import { switchMap } from 'rxjs';
 import { Pessoa, RespostaPessoa } from '../../models/models.types';
 import { AbitusService } from '../../services/abitus.service';
 import { PaginacaoService } from '../../services/paginacao.service';
 import { CardFotoComponent } from './components/card-foto/card-foto.component';
+import { FiltroComponent } from './components/filtro/filtro.component';
 
 @Component({
   selector: 'app-grid-fotos',
   templateUrl: './grid-fotos.component.html',
   styleUrl: './grid-fotos.component.scss',
   standalone: true,
-  imports: [CommonModule, CardFotoComponent],
+  imports: [CommonModule, CardFotoComponent, FiltroComponent],
 })
 export class GridFotosComponent {
   private readonly _abitusService = inject(AbitusService);
