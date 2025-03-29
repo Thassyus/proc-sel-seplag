@@ -1,24 +1,27 @@
-import { JsonPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { AbitusService } from '../../abitus.service';
-import { RespostaPessoa } from '../../models.types';
+import { Pessoa, RespostaPessoa } from '../../models.types';
 
 @Component({
   selector: 'app-grid-fotos',
   templateUrl: './grid-fotos.component.html',
   styleUrl: './grid-fotos.component.scss',
   standalone: true,
-  imports: [JsonPipe],
+  imports: [CommonModule],
 })
 export class GridFotosComponent {
   private readonly _abitusService = inject(AbitusService);
 
-  listaPessoas: any = [];
+  listaPessoas: Pessoa[] = [];
+  dtDesaparecimento: string = '';
 
   ngOnInit(): void {
+    this.dtDesaparecimento = '';
+
     this._abitusService.listarPessoas().subscribe({
-      next: (listaPessoas: RespostaPessoa) => {
-        this.listaPessoas = listaPessoas;
+      next: (respPessoas: RespostaPessoa) => {
+        this.listaPessoas = respPessoas.content;
       },
     });
   }
