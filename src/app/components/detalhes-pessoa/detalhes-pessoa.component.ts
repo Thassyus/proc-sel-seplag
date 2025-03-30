@@ -1,21 +1,31 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Pessoa } from '../../models/models.types';
 import { AbitusService } from '../../services/abitus.service';
+import { DialogInformacoesComponent } from './components/dialog-informacoes/dialog-informacoes.component';
 
 @Component({
   selector: 'app-detalhes-pessoa',
   templateUrl: './detalhes-pessoa.component.html',
   styleUrl: './detalhes-pessoa.component.scss',
   standalone: true,
-  imports: [MatButtonModule, MatTooltip, RouterModule, CommonModule],
+  imports: [
+    MatButtonModule,
+    MatTooltip,
+    RouterModule,
+    CommonModule,
+    MatDialogModule,
+    DialogInformacoesComponent,
+  ],
 })
 export class DetalhesPessoaComponent {
   private readonly _route = inject(ActivatedRoute);
   private readonly _abitusService = inject(AbitusService);
+  private readonly dialog = inject(MatDialog);
 
   idPessoa!: string;
   dadosPessoa!: Pessoa;
@@ -82,5 +92,11 @@ export class DetalhesPessoaComponent {
         this.dtLocalizacao = localizacaoData.split('-').reverse().join('/');
       }
     }
+  }
+
+  incluirInformacoes() {
+    this.dialog.open(DialogInformacoesComponent, {
+      disableClose: true,
+    });
   }
 }

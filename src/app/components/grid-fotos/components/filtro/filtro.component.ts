@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { Sexo, Situacao } from '../../../../models/models.types';
 import { FiltroService } from '../../../../services/filtro.service';
 import { PaginacaoService } from '../../../../services/paginacao.service';
@@ -23,7 +24,9 @@ import { PaginacaoService } from '../../../../services/paginacao.service';
     MatSelectModule,
     MatButtonModule,
     MatTooltipModule,
+    NgxMaskDirective,
   ],
+  providers: [provideNgxMask()],
 })
 export class FiltroComponent {
   private readonly _formBuilder = inject(FormBuilder);

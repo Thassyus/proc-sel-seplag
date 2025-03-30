@@ -1,0 +1,71 @@
+<div class="flex items-center justify-between h-14 text-white bg-blue-900">
+  <div class="text-md font-semibold ml-4 tracking-wider uppercase">
+    Informações Adicionais
+  </div>
+
+  <button mat-icon-button mat-dialog-close [tabIndex]="-1">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<mat-dialog-content>
+  <div
+    [formGroup]="formInfo"
+    class="space-y-5 w-full sm:min-w-96 lg:min-w-[40rem]"
+  >
+    <div class="flex flex-col">
+      <mat-label>Informações:</mat-label>
+
+      <input matInput type="text" formControlName="informacao" />
+    </div>
+
+    <div class="flex flex-col w-40">
+      <mat-label>Data:</mat-label>
+
+      <input
+        matInput
+        type="text"
+        formControlName="data"
+        mask="d0/M0/0000"
+        [dropSpecialCharacters]="false"
+        [leadZeroDateTime]="true"
+      />
+    </div>
+
+    <div class="flex flex-col">
+      <mat-label>Descrição:</mat-label>
+
+      <input matInput type="text" formControlName="descricao" />
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <div class="flex flex-row justify-end w-full">
+    <div class="p-2">
+      <button
+        type="button"
+        mat-raised-button
+        mat-dialog-close
+        class="!bg-blue-900 !text-white hover:!bg-blue-600"
+        matTooltip="Fechar"
+        matTooltipShowDelay="500"
+      >
+        Voltar
+      </button>
+    </div>
+
+    <div class="p-2">
+      <button
+        type="button"
+        mat-raised-button
+        class="!bg-blue-900 !text-white hover:!bg-blue-600"
+        matTooltip="Voltar para tela inicial"
+        matTooltipShowDelay="500"
+        (click)="enviar()"
+      >
+        Enviar
+      </button>
+    </div>
+  </div>
+</mat-dialog-actions>

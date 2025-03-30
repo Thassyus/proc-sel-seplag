@@ -85,14 +85,29 @@
 <div class="border-t mt-5 mb-5 ml-10 mr-10"></div>
 
 <div class="flex flex-row justify-end">
-  <button
-    [routerLink]="['/grid-fotos']"
-    type="button"
-    mat-raised-button
-    class="!bg-blue-900 !text-white hover:!bg-blue-600"
-    matTooltip="Voltar para tela inicial"
-    matTooltipShowDelay="500"
-  >
-    Voltar
-  </button>
+  <div class="p-2">
+    <button
+      [routerLink]="['/grid-fotos']"
+      type="button"
+      mat-raised-button
+      class="!bg-blue-900 !text-white hover:!bg-blue-600"
+      matTooltip="Voltar para tela inicial"
+      matTooltipShowDelay="500"
+    >
+      Voltar
+    </button>
+  </div>
+
+  <div class="p-2">
+    <button
+      type="button"
+      mat-raised-button
+      class="!bg-blue-900 !text-white hover:!bg-blue-600"
+      matTooltip="Voltar para tela inicial"
+      matTooltipShowDelay="500"
+      (click)="incluirInformacoes()"
+    >
+      Incluir Informações
+    </button>
+  </div>
 </div>
