@@ -72,3 +72,8 @@ export interface Filtro {
   sexo?: Sexo;
   status?: Situacao;
 }
+
+export interface ArquivoFoto {
+  file: File;
+  url: string;
+}

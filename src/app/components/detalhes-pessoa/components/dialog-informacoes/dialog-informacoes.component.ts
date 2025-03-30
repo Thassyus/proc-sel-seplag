@@ -10,6 +10,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { ArquivoFoto } from '../../../../models/models.types';
+import { AnexarFotosComponent } from '../anexar-fotos/anexar-fotos.component';
 
 @Component({
   selector: 'app-dialog-informacoes',
@@ -24,6 +26,7 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
     MatInputModule,
     ReactiveFormsModule,
     NgxMaskDirective,
+    AnexarFotosComponent,
   ],
   providers: [provideNgxMask()],
 })
@@ -32,6 +35,7 @@ export class DialogInformacoesComponent {
   private readonly _formBuilder = inject(FormBuilder);
 
   formInfo!: UntypedFormGroup;
+  listaFotos: ArquivoFoto[] = [];
 
   ngOnInit(): void {
     this.criaFormulario();
@@ -45,6 +49,28 @@ export class DialogInformacoesComponent {
       ocoId: [null],
       fotos: [],
     });
+  }
+
+  adicionarFotos(arquivos: File[]) {
+    arquivos.forEach((arquivo) => {
+      const existeArquivo = this.listaFotos.find(
+        (foto) => foto.file.name === arquivo.name
+      );
+
+      if (!existeArquivo) {
+        const fotoNova: ArquivoFoto = {
+          file: arquivo,
+          url: URL.createObjectURL(arquivo),
+        };
+
+        this.listaFotos.push(fotoNova);
+      }
+    });
+  }
+
+  removerFoto(index: number) {
+    URL.revokeObjectURL(this.listaFotos[index].url);
+    this.listaFotos.splice(index, 1);
   }
 
   enviar() {

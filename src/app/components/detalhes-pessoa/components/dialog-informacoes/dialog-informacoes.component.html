@@ -1,5 +1,5 @@
 <div class="flex items-center justify-between h-14 text-white bg-blue-900">
-  <div class="text-md font-semibold ml-4 tracking-wider uppercase">
+  <div class="font-semibold ml-4 tracking-wider uppercase">
     Informações Adicionais
   </div>
 
@@ -37,35 +37,66 @@
 
       <input matInput type="text" formControlName="descricao" />
     </div>
+
+    <fieldset class="border w-full p-4 rounded-md bg-gray-50 text-black">
+      <legend class="bg-gray-200 p-2 px-2 rounded-md text-xs font-medium">
+        Lista de Fotos
+      </legend>
+
+      @if (listaFotos.length > 0) {
+      <!---->
+      @for (foto of listaFotos; track $index) {
+      <div class="flex flex-row justify-between">
+        <div class="text-black">
+          {{ foto.file.name }}
+        </div>
+
+        <div class="text-red-500" (click)="removerFoto($index)">
+          <mat-icon>delete</mat-icon>
+        </div>
+      </div>
+      } } @else {
+      <div>Não existem fotos anexadas!</div>
+      <!---->
+      }
+    </fieldset>
+
+    <div class="border-t mt-2 mb-2"></div>
   </div>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <div class="flex flex-row justify-end w-full">
-    <div class="p-2">
-      <button
-        type="button"
-        mat-raised-button
-        mat-dialog-close
-        class="!bg-blue-900 !text-white hover:!bg-blue-600"
-        matTooltip="Fechar"
-        matTooltipShowDelay="500"
-      >
-        Voltar
-      </button>
+  <div class="flex flex-row justify-between w-full">
+    <div>
+      <anexar-fotos (fotosNovas)="adicionarFotos($event)"></anexar-fotos>
     </div>
 
-    <div class="p-2">
-      <button
-        type="button"
-        mat-raised-button
-        class="!bg-blue-900 !text-white hover:!bg-blue-600"
-        matTooltip="Voltar para tela inicial"
-        matTooltipShowDelay="500"
-        (click)="enviar()"
-      >
-        Enviar
-      </button>
+    <div class="flex flex-row">
+      <div class="p-2">
+        <button
+          type="button"
+          mat-raised-button
+          mat-dialog-close
+          class="!bg-blue-900 !text-white hover:!bg-blue-600"
+          matTooltip="Fechar"
+          matTooltipShowDelay="500"
+        >
+          Voltar
+        </button>
+      </div>
+
+      <div class="p-2">
+        <button
+          type="button"
+          mat-raised-button
+          class="!bg-blue-900 !text-white hover:!bg-blue-600"
+          matTooltip="Voltar para tela inicial"
+          matTooltipShowDelay="500"
+          (click)="enviar()"
+        >
+          Enviar
+        </button>
+      </div>
     </div>
   </div>
 </mat-dialog-actions>

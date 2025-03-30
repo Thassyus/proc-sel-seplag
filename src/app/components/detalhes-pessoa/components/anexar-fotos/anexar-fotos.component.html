@@ -1,0 +1,17 @@
+<label>
+  <input
+    type="file"
+    class="hidden"
+    (change)="selecionandoArquivos($event)"
+    [accept]="arquivosAceitos"
+    multiple
+  />
+
+  <div class="mt-2 mb-2"></div>
+
+  <div
+    class="bg-blue-900 hover:bg-blue-600 p-2 text-white rounded-md w-fit cursor-pointer h-9 flex flex-col items-center justify-center text-sm text-sm tracking-wider font-medium"
+  >
+    Adicionar Foto
+  </div>
+</label>
