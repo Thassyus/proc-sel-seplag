@@ -9,6 +9,7 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { ArquivoFoto } from '../../../../models/models.types';
 import { AnexarFotosComponent } from '../anexar-fotos/anexar-fotos.component';
@@ -27,6 +28,7 @@ import { AnexarFotosComponent } from '../anexar-fotos/anexar-fotos.component';
     ReactiveFormsModule,
     NgxMaskDirective,
     AnexarFotosComponent,
+    MatTooltipModule,
   ],
   providers: [provideNgxMask()],
 })
@@ -66,6 +68,11 @@ export class DialogInformacoesComponent {
         this.listaFotos.push(fotoNova);
       }
     });
+  }
+
+  visualizarFoto(index: number) {
+    const url = this.listaFotos[index].url;
+    window.open(url, '_blank');
   }
 
   removerFoto(index: number) {
