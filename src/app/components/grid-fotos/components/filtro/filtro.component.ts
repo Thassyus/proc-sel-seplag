@@ -4,21 +4,33 @@ import {
   ReactiveFormsModule,
   UntypedFormGroup,
 } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { Sexo, Situacao } from '../../../../models/models.types';
+import { FiltroService } from '../../../../services/filtro.service';
+import { PaginacaoService } from '../../../../services/paginacao.service';
 
 @Component({
   selector: 'app-filtro',
   templateUrl: './filtro.component.html',
   styleUrl: './filtro.component.scss',
   standalone: true,
-  imports: [ReactiveFormsModule, MatFormFieldModule, MatSelectModule],
+  imports: [
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatTooltipModule,
+  ],
 })
 export class FiltroComponent {
   private readonly _formBuilder = inject(FormBuilder);
+  private readonly _filtroService = inject(FiltroService);
+  private readonly _paginacaoService = inject(PaginacaoService);
 
-  formBuscar!: UntypedFormGroup;
+  formFiltrar!: UntypedFormGroup;
 
   listaSexo: Sexo[] = [
     { value: 'MASCULINO', descricao: 'Masculino' },
@@ -35,12 +47,37 @@ export class FiltroComponent {
   }
 
   criaFormulario() {
-    this.formBuscar = this._formBuilder.group({
+    this.formFiltrar = this._formBuilder.group({
       nome: [null],
       faixaIdadeInicial: [null],
       faixaIdadeFinal: [null],
       sexo: [null],
       status: [null],
     });
+  }
+
+  limparFiltro() {
+    this.formFiltrar.reset();
+    const filtro = {};
+
+    this._paginacaoService.resetarPaginator();
+    this._paginacaoService.atualizarPaginacao({
+      pagina: 0,
+      porPagina: this._paginacaoService.ultimoPageSize,
+    });
+
+    this._filtroService.atualizarFiltro(filtro);
+  }
+
+  aplicarFiltro() {
+    const filtro = this.formFiltrar.value;
+
+    this._paginacaoService.resetarPaginator();
+    this._paginacaoService.atualizarPaginacao({
+      pagina: 0,
+      porPagina: this._paginacaoService.ultimoPageSize,
+    });
+
+    this._filtroService.atualizarFiltro(filtro);
   }
 }

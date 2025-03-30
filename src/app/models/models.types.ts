@@ -64,3 +64,11 @@ export interface Opcao {
 
 export type Sexo = Opcao;
 export type Situacao = Opcao;
+
+export interface Filtro {
+  nome?: string;
+  faixaIdadeInicial?: number;
+  faixaIdadeFinal?: number;
+  sexo?: Sexo;
+  status?: Situacao;
+}

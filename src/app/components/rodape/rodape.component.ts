@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import {
   MatPaginator,
   MatPaginatorIntl,
@@ -16,6 +16,8 @@ import { PaginacaoService } from '../../services/paginacao.service';
   providers: [{ provide: MatPaginatorIntl, useValue: ptBRPaginator() }],
 })
 export class RodapeComponent {
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   private readonly _paginacaoService = inject(PaginacaoService);
 
   length = 10;
@@ -31,12 +33,24 @@ export class RodapeComponent {
     });
   }
 
+  ngAfterViewInit(): void {
+    if (!this.paginator) return;
+
+    this._paginacaoService.resetPaginator$.subscribe(() => {
+      setTimeout(() => {
+        if (this.paginator) {
+          this.paginator?.firstPage();
+        }
+      });
+    });
+  }
+
   paginacao(event: PageEvent) {
     this.length = event.length;
     this.pageSize = event.pageSize;
     this.pageIndex = event.pageIndex;
 
-    this._paginacaoService.atualizaPaginacao({
+    this._paginacaoService.atualizarPaginacao({
       pagina: this.pageIndex,
       porPagina: this.pageSize,
     });
