@@ -13,4 +13,11 @@ export const routes: Routes = [
         (m) => m.GridFotosComponent
       ),
   },
+  {
+    path: 'detalhes-pessoa/:id',
+    loadComponent: () =>
+      import('./components/detalhes-pessoa/detalhes-pessoa.component').then(
+        (m) => m.DetalhesPessoaComponent
+      ),
+  },
 ];

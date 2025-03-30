@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { combineLatest, switchMap } from 'rxjs';
 import { Pessoa, RespostaPessoa } from '../../models/models.types';
 import { AbitusService } from '../../services/abitus.service';
@@ -13,7 +14,7 @@ import { FiltroComponent } from './components/filtro/filtro.component';
   templateUrl: './grid-fotos.component.html',
   styleUrl: './grid-fotos.component.scss',
   standalone: true,
-  imports: [CommonModule, CardFotoComponent, FiltroComponent],
+  imports: [CommonModule, RouterModule, CardFotoComponent, FiltroComponent],
 })
 export class GridFotosComponent {
   private readonly _abitusService = inject(AbitusService);

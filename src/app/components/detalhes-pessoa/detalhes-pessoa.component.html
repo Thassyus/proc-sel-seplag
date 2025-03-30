@@ -1,0 +1,98 @@
+<div class="flex flex-col items-center sm:flex-row sm:items-start">
+  <div class="p-4">
+    <img
+      [src]="dadosPessoa?.urlFoto"
+      alt="foto"
+      class="object-cover h-80 rounded-md shadow-lg"
+    />
+
+    <div
+      class="mt-2 uppercase text-lg tracking-widest flex flex-col sm:flex-row leading-none"
+    >
+      <div class="font-semibold">
+        {{ qtdeDiasDesap }} dia(s) desaparecido(a)
+      </div>
+    </div>
+  </div>
+
+  <div class="flex flex-col items-center mt-10">
+    <div
+      class="w-fit p-2 border text-white rounded-md text-2xl uppercase tracking-wider font-semibold"
+      [ngClass]="{ 
+    'bg-green-500': dadosPessoa?.ultimaOcorrencia?.dataLocalizacao,
+    'bg-red-500': !dadosPessoa?.ultimaOcorrencia?.dataLocalizacao,
+     }"
+    >
+      {{ situacaoPessoa }}
+    </div>
+
+    <div class="uppercase font-normal space-y-3">
+      <div class="mt-2 mb-2"></div>
+
+      <div
+        class="text-lg tracking-widest flex flex-col sm:flex-row leading-none text-center"
+      >
+        <div class="font-semibold">
+          {{ dadosPessoa?.nome }}
+        </div>
+      </div>
+
+      <div class="border border-gray-700"></div>
+
+      <div
+        class="text-lg tracking-widest flex flex-col sm:flex-row leading-none"
+      >
+        Sexo:
+
+        <div class="font-semibold">
+          {{ dadosPessoa?.sexo }}
+        </div>
+      </div>
+
+      <div
+        class="text-lg tracking-widest flex flex-col sm:flex-row leading-none"
+      >
+        Idade:
+
+        <div class="font-semibold">
+          {{ dadosPessoa?.idade }}
+        </div>
+      </div>
+
+      <div
+        class="text-lg tracking-widest flex flex-col sm:flex-row leading-none"
+      >
+        Data/Hora:
+
+        <div class="font-semibold">
+          {{ dtDesaparecimento }}
+        </div>
+      </div>
+
+      <div
+        class="text-lg tracking-widest flex flex-col lg:flex-row leading-none"
+      >
+        Local do Desaparecimento:
+
+        <div class="font-semibold">
+          {{ dadosPessoa?.ultimaOcorrencia?.localDesaparecimentoConcat }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="border-t mt-5 mb-5 ml-10 mr-10"></div>
+
+<div class="flex flex-row justify-end">
+  <button
+    [routerLink]="['/grid-fotos']"
+    type="button"
+    mat-raised-button
+    class="!bg-blue-900 !text-white hover:!bg-blue-600"
+    matTooltip="Voltar para tela inicial"
+    matTooltipShowDelay="500"
+  >
+    Voltar
+  </button>
+</div>

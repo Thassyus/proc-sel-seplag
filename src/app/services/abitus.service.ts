@@ -1,14 +1,14 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Filtro, RespostaPessoa } from '../models/models.types';
+import { Filtro, Pessoa, RespostaPessoa } from '../models/models.types';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AbitusService {
   private readonly _http = inject(HttpClient);
-  private readonly _url = 'https://abitus-api.geia.vip/v1/pessoas/aberto';
+  private readonly _url = 'https://abitus-api.geia.vip/v1';
 
   listarPessoas(
     pagina = 0,
@@ -36,6 +36,13 @@ export class AbitusService {
       if (filtro.status) params = params.set('status', filtro.status.value);
     }
 
-    return this._http.get<RespostaPessoa>(`${this._url}/filtro`, { params });
+    return this._http.get<RespostaPessoa>(
+      `${this._url}/pessoas/aberto/filtro`,
+      { params }
+    );
+  }
+
+  buscarPessoas(idPessoa: string): Observable<Pessoa> {
+    return this._http.get<Pessoa>(`${this._url}/pessoas/${idPessoa}`);
   }
 }

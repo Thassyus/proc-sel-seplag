@@ -4,6 +4,7 @@ import {
   MatPaginatorIntl,
   PageEvent,
 } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 import { ptBRPaginator } from '../../ptBRPaginator';
 import { PaginacaoService } from '../../services/paginacao.service';
 
@@ -19,6 +20,7 @@ export class RodapeComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   private readonly _paginacaoService = inject(PaginacaoService);
+  private readonly _router = inject(Router);
 
   length = 10;
   pageSize = 10;
@@ -31,6 +33,10 @@ export class RodapeComponent {
     this._paginacaoService.totalRegistros$.subscribe((total) => {
       this.length = total;
     });
+  }
+
+  get naTelaInicial(): boolean {
+    return this._router.url === '/grid-fotos';
   }
 
   ngAfterViewInit(): void {

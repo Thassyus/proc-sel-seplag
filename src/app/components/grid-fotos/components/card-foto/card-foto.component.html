@@ -1,8 +1,8 @@
 <div
   class="w-80 h-40 border bg-gray-50 rounded-lg flex flex-row"
   [ngClass]="{ 
-    'bg-green-300': pessoa.ultimaOcorrencia.dataLocalizacao,
-    'bg-red-300': !pessoa.ultimaOcorrencia.dataLocalizacao,
+    'bg-green-300': pessoa?.ultimaOcorrencia?.dataLocalizacao,
+    'bg-red-300': !pessoa?.ultimaOcorrencia?.dataLocalizacao,
      }"
 >
   @if (pessoa.urlFoto) {
