@@ -31,6 +31,7 @@ export class FiltroComponent {
   private readonly _paginacaoService = inject(PaginacaoService);
 
   formFiltrar!: UntypedFormGroup;
+  filtrando: boolean = false;
 
   listaSexo: Sexo[] = [
     { value: 'MASCULINO', descricao: 'Masculino' },
@@ -59,6 +60,7 @@ export class FiltroComponent {
   limparFiltro() {
     this.formFiltrar.reset();
     const filtro = {};
+    this.filtrando = false;
 
     this._paginacaoService.resetarPaginator();
     this._paginacaoService.atualizarPaginacao({
@@ -69,7 +71,9 @@ export class FiltroComponent {
     this._filtroService.atualizarFiltro(filtro);
   }
 
-  aplicarFiltro() {
+  aplicaFiltro() {
+    this.filtrando = true;
+
     const filtro = this.formFiltrar.value;
 
     this._paginacaoService.resetarPaginator();
