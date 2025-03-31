@@ -96,6 +96,7 @@ export class DetalhesPessoaComponent {
 
   incluirInformacoes() {
     this.dialog.open(DialogInformacoesComponent, {
+      data: { ocoId: this.dadosPessoa.ultimaOcorrencia.ocoId },
       disableClose: true,
     });
   }

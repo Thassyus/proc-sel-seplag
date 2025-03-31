@@ -1,7 +1,13 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Filtro, Pessoa, RespostaPessoa } from '../models/models.types';
+import {
+  ArquivoFoto,
+  Filtro,
+  InformacoesEnvio,
+  Pessoa,
+  RespostaPessoa,
+} from '../models/models.types';
 
 @Injectable({
   providedIn: 'root',
@@ -44,5 +50,32 @@ export class AbitusService {
 
   buscarPessoas(idPessoa: string): Observable<Pessoa> {
     return this._http.get<Pessoa>(`${this._url}/pessoas/${idPessoa}`);
+  }
+
+  enviarInformacoes(
+    formDados: any,
+    fotos: ArquivoFoto[]
+  ): Observable<InformacoesEnvio> {
+    const formData = new FormData();
+
+    fotos.forEach((foto) => {
+      formData.append('files', foto.file, foto.file.name);
+    });
+
+    const params = new HttpParams()
+      .set('informacao', formDados.informacoes)
+      .set('descricao', formDados.descricao)
+      .set('data', formDados.data.split('/').reverse().join('-'))
+      .set('ocoId', formDados.ocoId);
+
+    return this._http.post<InformacoesEnvio>(
+      `${this._url}/ocorrencias/informacoes-desaparecido`,
+      formData,
+      {
+        params,
+        reportProgress: true,
+        responseType: 'json',
+      }
+    );
   }
 }

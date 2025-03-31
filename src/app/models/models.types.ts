@@ -77,3 +77,15 @@ export interface ArquivoFoto {
   file: File;
   url: string;
 }
+
+export interface InformacoesEnvio {
+  id: number;
+  ocoId: number;
+  informacao: string;
+  data: string;
+  fotos: Foto[];
+}
+
+export interface Foto {
+  item: string;
+}
