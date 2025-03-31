@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { combineLatest, switchMap } from 'rxjs';
+import { combineLatest, finalize, switchMap } from 'rxjs';
 import { Pessoa, RespostaPessoa } from '../../models/models.types';
 import { AbitusService } from '../../services/abitus.service';
+import { CarregandoService } from '../../services/carregando.service';
 import { FiltroService } from '../../services/filtro.service';
 import { PaginacaoService } from '../../services/paginacao.service';
 import { CardFotoComponent } from './components/card-foto/card-foto.component';
@@ -20,6 +21,7 @@ export class GridFotosComponent {
   private readonly _abitusService = inject(AbitusService);
   private readonly _paginacaoService = inject(PaginacaoService);
   private readonly _filtroService = inject(FiltroService);
+  private readonly _carregandoService = inject(CarregandoService);
 
   listaPessoas: Pessoa[] = [];
 
@@ -29,13 +31,13 @@ export class GridFotosComponent {
       this._filtroService.filtro$,
     ])
       .pipe(
-        switchMap(([paginacao, filtro]) =>
-          this._abitusService.listarPessoas(
-            paginacao.pagina,
-            paginacao.porPagina,
-            filtro
-          )
-        )
+        switchMap(([paginacao, filtro]) => {
+          this._carregandoService.mostrarCarregando();
+
+          return this._abitusService
+            .listarPessoas(paginacao.pagina, paginacao.porPagina, filtro)
+            .pipe(finalize(() => this._carregandoService.esconderCarregando()));
+        })
       )
       .subscribe({
         next: (respPessoas: RespostaPessoa) => {
