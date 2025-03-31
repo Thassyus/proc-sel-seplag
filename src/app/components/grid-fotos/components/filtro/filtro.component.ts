@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { ToastrService } from 'ngx-toastr';
 import { Sexo, Situacao } from '../../../../models/models.types';
 import { FiltroService } from '../../../../services/filtro.service';
 import { PaginacaoService } from '../../../../services/paginacao.service';
@@ -32,6 +33,7 @@ export class FiltroComponent {
   private readonly _formBuilder = inject(FormBuilder);
   private readonly _filtroService = inject(FiltroService);
   private readonly _paginacaoService = inject(PaginacaoService);
+  private readonly toastrService = inject(ToastrService);
 
   formFiltrar!: UntypedFormGroup;
   filtrando: boolean = false;
@@ -42,8 +44,8 @@ export class FiltroComponent {
   ];
 
   listaSituacao: Situacao[] = [
-    { value: 'DESAPARECIDO', descricao: 'Desaparecido' },
-    { value: 'LOCALIZADO', descricao: 'Localizado' },
+    { value: 'DESAPARECIDO', descricao: 'Desaparecido(a)' },
+    { value: 'LOCALIZADO', descricao: 'Localizado(a)' },
   ];
 
   ngOnInit(): void {
@@ -75,9 +77,22 @@ export class FiltroComponent {
   }
 
   aplicaFiltro() {
-    this.filtrando = true;
-
     const filtro = this.formFiltrar.value;
+
+    if (
+      filtro.nome === null &&
+      filtro.sexo === null &&
+      filtro.faixaIdadeInicial === null &&
+      filtro.faixaIdadeFinal === null &&
+      filtro.status === null
+    ) {
+      this.toastrService.warning(
+        'É necessário preencher algum campo para pesquisar.'
+      );
+      return;
+    }
+
+    this.filtrando = true;
 
     this._paginacaoService.resetarPaginator();
     this._paginacaoService.atualizarPaginacao({

@@ -1,13 +1,14 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'anexar-fotos',
   templateUrl: './anexar-fotos.component.html',
   styleUrl: './anexar-fotos.component.scss',
   standalone: true,
-  imports: [MatIconModule, MatButtonModule],
+  imports: [MatIconModule, MatButtonModule, MatTooltipModule],
 })
 export class AnexarFotosComponent {
   @Input() arquivosAceitos = 'image/*';
