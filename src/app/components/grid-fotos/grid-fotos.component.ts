@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { combineLatest, finalize, switchMap } from 'rxjs';
+import { combineLatest, finalize, Subject, switchMap, takeUntil } from 'rxjs';
 import { Pessoa, RespostaPessoa } from '../../models/models.types';
 import { AbitusService } from '../../services/abitus.service';
 import { CarregandoService } from '../../services/carregando.service';
@@ -23,6 +23,8 @@ export class GridFotosComponent {
   private readonly _filtroService = inject(FiltroService);
   private readonly _carregandoService = inject(CarregandoService);
 
+  private readonly _destroy$ = new Subject<void>();
+
   listaPessoas: Pessoa[] = [];
 
   ngOnInit(): void {
@@ -31,6 +33,7 @@ export class GridFotosComponent {
       this._filtroService.filtro$,
     ])
       .pipe(
+        takeUntil(this._destroy$),
         switchMap(([paginacao, filtro]) => {
           this._carregandoService.mostrarCarregando();
 
@@ -47,5 +50,10 @@ export class GridFotosComponent {
           );
         },
       });
+  }
+
+  ngOnDestroy(): void {
+    this._destroy$.next();
+    this._destroy$.complete();
   }
 }

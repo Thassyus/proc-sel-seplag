@@ -33,4 +33,9 @@ export class CardFotoComponent {
       }
     }
   }
+
+  erroCarregandoImagem(event: Event) {
+    const imagem = event.target as HTMLImageElement;
+    imagem.src = 'assets/pessoa-sem-foto.png';
+  }
 }
