@@ -6,6 +6,8 @@
 
 ### CPF: 038.682.661-78
 
+### E-mail: thassyus.fabiano@gmail.com
+
 ### Framework utilizado: **Angular 17**
 
 ### Bibliotecas utilizadas:
